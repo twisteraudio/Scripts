@@ -8,7 +8,9 @@ We know you have choices when it comes to dumb scripting repos but we are glad y
 None of these scripts break anything, but fair warning.
 
 [Contents]
+
 ->.ps1 - Collection of Powershell scripts
+
 ->.py - Collection of Python scripts
 
 More to come as I make more dumb things
