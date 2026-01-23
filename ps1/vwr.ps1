@@ -1,5 +1,5 @@
 #do you hate Windows Photos too?
-#use this script and let Powershell load it's onw image viewer
+#use this script and let Powershell load it's own image viewer
 
 param(
 	[Parameter(Mandatory=$true)]
@@ -38,4 +38,5 @@ $Form.ShowDialog()
 
 $Image.Dispose()
 $Form.Dispose()
+
 
