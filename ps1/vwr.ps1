@@ -1,22 +1,25 @@
+#do you hate Windows Photos too?
+#use this script and let Powershell load it's onw image viewer
+
 param(
 	[Parameter(Mandatory=$true)]
-	[string]$IP,
-	[switch]$g)
+	[string]$IP)
+
+if ($IsWindows) {
+	continue
+}
+else {
+	Write-Host "This program is only for Windows systems"
+	sleep 3; exit
+}
 
 if (-not (Test-Path $IP)) {
 	Write-Error "Not found: $IP"
     exit 1
 }
 
-if ($g) {
-	$ft = "\*.gif"
-}
-else {
-	$ft = "\*"
-}
-
 #$filepath = read-host "What directory would you like to use?"
-$ImgPath = ls -path ($IP + $ft) | get-random
+$ImgPath = ls -path ($IP + "\*") | get-random
 
 add-type -assemblyname system.windows.forms
 $Form = New-Object System.Windows.Forms.Form
@@ -35,3 +38,4 @@ $Form.ShowDialog()
 
 $Image.Dispose()
 $Form.Dispose()
+
