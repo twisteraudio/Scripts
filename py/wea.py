@@ -1,7 +1,7 @@
 #weather app for python
 #using wttr.in
 
-import requests, argparse, os, subprocess
+import argparse, os
 
 parser = argparse.ArgumentParser(description = "Python Weather app using wttr.in as base")
 parser.add_argument("-loc", help="Location you would like to use")
