@@ -1,6 +1,6 @@
 #USE THIS FILE TO PASTE CODES INTO SO YOU CAN COPY THEM INTO OTHER PROJECTS
 
-import argparse,time,os
+import argparse
 from scapy.all import sniff, IP
 
 def main():
