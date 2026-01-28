@@ -18,7 +18,6 @@ if (-not (Test-Path $IP)) {
     exit 1
 }
 
-#$filepath = read-host "What directory would you like to use?"
 $ImgPath = ls -path ($IP + "\*") | get-random
 
 add-type -assemblyname system.windows.forms
@@ -38,5 +37,6 @@ $Form.ShowDialog()
 
 $Image.Dispose()
 $Form.Dispose()
+
 
 
