@@ -10,7 +10,7 @@ while True:
     user_input = input('>> ')
 
     if user_input == 'q':
-        os.system('cls')
+        os.system('exit')
         break
 
     elif user_input == 's':
@@ -27,4 +27,5 @@ while True:
     else:
         os.system('cls')
         print('please try again...')
+
 
