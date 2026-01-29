@@ -1,16 +1,12 @@
-import socket
-import os
-import sys
-import datetime
+import socket, os, sys, datetime,argparse
 
-while True:
+def main():
+    parser = argparse.ArgumentParser(description = "Python IP Port scan")
+    parser.add_argument("-i", "--IP", help="IP Address you would like to scan")
+    args = parser.parse_args()
 
-    remoteserver = input('enter a remote host to scan: ')
+    remoteserver = args.IP
     remoteserverIP = socket.gethostbyname(remoteserver)
-
-    print('-' *8)
-    print('please wait while the scan begins')
-    print('-' *8)
 
     tn = datetime.datetime.now()
 
@@ -35,5 +31,11 @@ while True:
 
     total = tn2 - tn
 
-
     print('Scan completed in:', total)
+
+print('-' *8)
+print('please wait while the scan begins')
+print('-' *8)
+
+if __name__ == "__main__":
+    main()
