@@ -23,7 +23,7 @@ while True:
             sock.close()
     except KeyboardInterrupt:
         print('you pressed ctrl+c')
-        os.system('cls')
+        os.system('exit')
     except socket.gaierror:
         print('Hostname could not be resolved...')
         sys.exit()
@@ -34,5 +34,6 @@ while True:
     tn2 = datetime.datetime.now()
 
     total = tn2 - tn
+
 
     print('Scan completed in:', total)
