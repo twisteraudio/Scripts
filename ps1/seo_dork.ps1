@@ -52,4 +52,5 @@ $location = '("tx" OR
 "addison"
 )'
 
+#using firefox, searching google for results
 firefox --search "$sites $positions AND $location after:$Date_min1"
