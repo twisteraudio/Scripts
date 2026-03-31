@@ -1,11 +1,16 @@
 #goal: use google dorks to give results of applications within 3 days
 #must be used as non-sudo
 
+param(
+    [parameter(Mandatory=$true)]
+    [string]$min
+)
+
 #get-date -format "yyyy-MM-dd"
 $DateNow = get-date -format "yyyy-MM-dd"
 
-#getting date from yesterday, filtering results from ~24hours
-$Date_min1 = (get-date).AddDays(-1) | get-date -format "yyyy-MM-dd"
+#getting date from yesterday, filtering results from input parameter
+$Date_min1 = (get-date).AddDays(-$min) | get-date -format "yyyy-MM-dd"
 
 #What sites the search will use
 $sites = '(
