@@ -1,7 +1,7 @@
 # Scripts
 Collection of scripts
 
-Welcome to my little space of dumb scripts
+Welcome to my little space of scripts
 We know you have choices when it comes to dumb scripting repos but we are glad you chose my repo of dumb scripts
 
 # [DISCLAIMER]
