@@ -1,4 +1,4 @@
-#goal: use google dorks to give results of applications within 3 days
+#goal: use google dorks to give results of applications within input parameters
 #must be used as non-sudo
 
 param(
