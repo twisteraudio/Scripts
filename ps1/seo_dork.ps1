@@ -35,7 +35,8 @@ $positions = '(
 )'
 
 #Location Keywords
-$location = '("tx" OR
+$location = '(
+"tx" OR
 "dallas" OR
 "plano" OR
 "dfw" OR
