@@ -6,10 +6,7 @@ param(
     [string]$min
 )
 
-#get-date -format "yyyy-MM-dd"
-$DateNow = get-date -format "yyyy-MM-dd"
-
-#getting date from yesterday, filtering results from input parameter
+#getting date, filtering results from input parameter
 $Date_min1 = (get-date).AddDays(-$min) | get-date -format "yyyy-MM-dd"
 
 #What sites the search will use
