@@ -1,12 +1,16 @@
-#goal: use google dorks to give results of applications within input parameters
+#goal: use google dorks to give results of job postings within input parameter
 #must be used as non-sudo
 
 param(
     [parameter(Mandatory=$true)]
-    [string]$min
+    [string]$min,
+    [switch]$q
 )
 
-#getting date, filtering results from input parameter
+#get-date -format "yyyy-MM-dd"
+#$DateNow = get-date -format "yyyy-MM-dd"
+
+#getting date from yesterday, filtering results from input parameter
 $Date_min1 = (get-date).AddDays(-$min) | get-date -format "yyyy-MM-dd"
 
 #What sites the search will use
@@ -35,11 +39,10 @@ $positions = '(
 )'
 
 #Location Keywords
-$location = '(
-"tx" OR
-"dallas" OR
-"plano" OR
+$location = '("dallas" OR
 "dfw" OR
+"dallas/ft worth"
+"plano" OR
 "allen" OR
 "mckinney" OR
 "irving" OR
@@ -47,8 +50,15 @@ $location = '(
 "rockwall" OR
 "rowlett" OR
 "las colinas" OR
-"addison"
+"addison" OR
+"richardson"
 )'
 
-#using firefox, searching google for results
-firefox --search "$sites $positions AND $location after:$Date_min1"
+if ($q) {
+    $search = "(inurl:'careers' OR 'jobs')"
+}
+else {
+    $search = $sites
+}
+
+firefox --search "$search $positions AND $location after:$Date_min1"
