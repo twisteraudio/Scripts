@@ -1,13 +1,8 @@
 #Local Time to UTC converter
 #usecase: for any NWS or other related postings that utilize UTC
 
-
-#example: (get-date "2021-08-26 16:44:42").ToLocalTime()
-#(Get-Date).ToUniversalTime().ToString('u') | get-date -format "HH:mm:ss"
-
 #parameter to take the time you would like to convert
 #24H format: 1PM == 13
-
 param(
     [parameter(Mandatory=$true)]
     [int]$t,
