@@ -5,7 +5,6 @@ param(
     [string]$loc
 )
 
-#$weather = read-host 'Please type the city you wish to check'
 $part1 = 'http://wttr.in/'
 $part2 = '?format=3'
 
