@@ -7,9 +7,6 @@ param(
     [switch]$q
 )
 
-#get-date -format "yyyy-MM-dd"
-#$DateNow = get-date -format "yyyy-MM-dd"
-
 #getting date from yesterday, filtering results from input parameter
 $Date_min1 = (get-date).AddDays(-$min) | get-date -format "yyyy-MM-dd"
 
@@ -39,7 +36,8 @@ $positions = '(
 )'
 
 #Location Keywords
-$location = '("dallas" OR
+$location = '(
+"dallas" OR
 "dfw" OR
 "dallas/ft worth"
 "plano" OR
