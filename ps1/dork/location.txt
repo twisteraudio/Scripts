@@ -1,0 +1,16 @@
+("dallas" OR
+"dfw" OR
+"dallas/ft worth"
+"plano" OR
+"allen" OR
+"mckinney" OR
+"irving" OR
+"frisco" OR
+"rockwall" OR
+"rowlett" OR
+"las colinas" OR
+"addison" OR
+"richardson" OR
+"garland" OR
+"murphy"
+)

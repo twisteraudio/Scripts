@@ -1,0 +1,11 @@
+(
+"cybersecurity" OR 
+"cyber security" OR 
+"information security" OR 
+"infosec" OR 
+"SOC" OR 
+"CISO" OR 
+"pentest" OR 
+"security engineer"
+"security"
+)
