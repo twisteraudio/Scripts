@@ -20,7 +20,7 @@ $sites = get-content -path "sites.txt" -raw
 
 #Position Keywords
 if (-not $basic -or $sec) {
-    $positions = get-content -path "basic.txt" -raw
+    $positions = read-host "What position would you like to search?"
 }
 if ($basic) {
     $positions = get-content -path "basic.txt" -raw
