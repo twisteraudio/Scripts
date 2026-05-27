@@ -1,22 +1,15 @@
 # Scripts
-Collection of scripts
+Welcome to my scripts repository. Thank you for visiting.
 
-Welcome to my little space of scripts
-We know you have choices when it comes to dumb scripting repos but we are glad you chose my repo of dumb scripts
+[DISCLAIMER]Please only run these scripts on systems where you have explicit authorization. All scripts are provided as-is and should be used at your own risk. While none are intended to cause issues, caution is always recommended. Some scripts are operating system-specific (primarily PowerShell .ps1 files), and several require administrative or sudo privileges.
 
-# [DISCLAIMER]
-Please run these scripts on machines you have expressed permission to deploy at your own risk.
-Additionally, none of these scripts should break anything, but  fair warning either way.
-Some scripts are OS specific (primarily .ps1 files) and some require admin/sudo privileges.
+Contents
 
-# Contents
+PowerShell Scripts (.ps1)
+A collection of PowerShell scripts.  Personal favorite: weather.ps1 – A lightweight weather application that uses Microsoft Text-to-Speech (TTS).
 
-->.ps1 - Collection of Powershell scripts
+Python Scripts (.py)
+A collection of Python scripts.  Personal favorite: pacs.py – A simple packet sniffer.
 
-  -Personal favorite: weather.ps1 (quick weather app that uses Microsoft TTS)
+Additional scripts will be added over time as new tools are developed.
 
-->.py - Collection of Python scripts
-
-  -Personal favorite: pacs.py (packet sniffer)
-
-More to come as I make more dumb things
