@@ -1,3 +1,5 @@
+#re-creating the 'top' command from linux environments
+
 While(1) 
 	{
 	gps | 

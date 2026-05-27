@@ -1,3 +1,5 @@
+#test wireless strength
+
 $netstr = (netsh wlan show interfaces) -match '^\s+Signal' -replace '^/s+Signal\s+:',''
 
 while (1) {
