@@ -14,7 +14,6 @@
     Outputs information to txt file
 #>
 
-
 param(
     [switch]$n,
     [switch]$p,
