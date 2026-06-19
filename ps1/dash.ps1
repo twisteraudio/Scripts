@@ -1,13 +1,33 @@
-#morning dashboard routine
-#goal: create a script to run at the start of the day#>
+<#
+.Synopsis
+    Gather quick system information
+.DESCRIPTION
+    Gathers information on system and network in a quick dashboard
+    Can be looped or piped to file output via parameter
+.PARAMETER n
+    Network flag, gathers network related information
+.PARAMETER p
+    Profile flag, gathers quick info for local profile
+.PARAMETER l
+    Looper, loops the dashboard for continuous minitoring
+.PARAMETER o
+    Outputs information to txt file
+#>
 
-param (
+
+param(
     [switch]$n,
-    [switch]$p
+    [switch]$p,
+    [switch]$t,
+    [switch]$l,
+    [switch]$o
 )
 
-#get system uptime
 $uptime = (get-uptime -Since).ToString()
+
+function get-test {
+    write-host "this script had a testing function thrown in..."
+}
 
 function get-thetime {
 
@@ -21,20 +41,13 @@ function get-thetime {
 
 function get-weather {
 
-    #checking OS, Windows requires useragent to work in terminal
-    if ($IsWindows) {
-        $part1 = 'http://wttr.in/'
-        $part2 = '?format=3'
-        (curl ($part1 + $part2) -useragent 'curl').content
-    }
-    else {
-        curl http://wttr.in/?format=3
-    }
+    #web request to retrieve weather info
+    Invoke-WebRequest -Uri "https://wttr.in/?format=3" -UseBasicParsing |
+    Select-Object -ExpandProperty Content
 }
 
 function get-driveinfo{
     get-psdrive | foreach-object {
-
         #selecting the drive(s) w/ 0gb space
         if ($_.free -gt 1) {
             write-host $_.name 'has' ([math]::Round($_.Free / 1GB, 2)) 'gb remaining' -foregroundcolor green
@@ -43,7 +56,6 @@ function get-driveinfo{
 }
 
 function get-top {
-
     #top clone, gets top 10 running processes by CPU usage
 	get-process | 
 	sort-object -des cpu | 
@@ -52,52 +64,79 @@ function get-top {
 }
 
 function get-IPinfo {
-
     #get IPv4 address
     if ($IsWindows) {
-        $IPinfo = (Get-NetIPAddress -AddressFamily IPv4 | Where-Object {$_.IPAddress -notlike "127.*"}).IPAddress
+        $IPinfo = (Get-NetIPAddress -AddressFamily IPv4 | 
+        Where-Object {$_.IPAddress -notlike "127.*"}).IPAddress
     }
     elseif ($IsLinux) {
         $IPinfo = hostname -I
     }
-    $IPinfo
+    [string]$IPinfo
 }
 
-if (-not $p -or $n) {
-    try {
-        get-weather
-        get-thetime
-        write-host "System has been booted since: $uptime" -foregroundcolor Yellow
-        get-IPinfo
-        get-driveinfo
-        get-top
+function get-dashboard {
+
+    if ($t) {
+        try {
+            write-host "testing"
+        }
+        catch {
+            write-warning "The test flag has issues..."
+        }
     }
-    catch {
-        write-warning "Error in script..."
+
+    if ($n) {
+        try {
+            clear-host
+            get-thetime
+            write-host "System has been booted since: $uptime" -foregroundcolor Yellow
+            get-IPinfo
+            get-driveinfo
+            get-top
+        }
+        catch {
+            write-warning "Error at -n switch...Something went wrong"
+        }
+    }
+
+    if ($p) {
+        try {
+            clear-host
+            get-IPinfo
+            get-thetime
+            get-weather
+        }
+        catch {
+            write-warning "Error at -p switch...Something went wrong"
+        }
     }
 }
 
-if ($n) {
-    try {
-        get-thetime
-        write-host "System has been booted since: $uptime" -foregroundcolor Yellow
-        get-IPinfo
-        get-driveinfo
-        get-top
+if ($l) {
+    try{
+        while(1) {
+            get-dashboard; sleep 5
+        }
     }
-    catch {
-        write-warning "Error at -n switch...Something went wrong"
+    finally {
+        write-host " KeyBoardInterrupt: Ctrl+C" -foregroundcolor yellow
     }
 }
 
-if ($p) {
+elseif ($o) {
     try {
-        get-IPinfo
-        get-thetime
-        get-weather
-        get-driveinfo
+    #dirty but quick way to get all output to a file
+    #because I wanted the color output still for terminal but being able to output everything to file
+    start-transcript -path "testing.txt" -Force | out-null
+    get-dashboard
+    stop-transcript | out-null
     }
     catch {
-        write-warning "Error at -p switch...Something went wrong"
+        write-warning "Error exporting file..."
     }
+}
+
+else {
+    get-dashboard
 }
