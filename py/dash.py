@@ -16,8 +16,10 @@ import platform
 import re
 import shutil
 import socket
+import string
 import subprocess
 import time
+from typing import List, Optional
 from datetime import datetime, timezone, timedelta
 
 #color text
@@ -57,18 +59,41 @@ def thetime(file_handle=None):
     print_output(f"System uptime: {uptime_str}", file_handle)
 
 #getting drive space info
-def drivespace(file_handle=None):
+def drivespace(file_handle=None,drives: Optional[List[str]] = None):
 
     current_os = platform.system()
 
-    if current_os == "Windows":
-        drivepath = "C:/"
-    else:
-        drivepath = "/"
-
-    total, used, free = shutil.disk_usage(drivepath)
-    print_output(f'Total: {(total / (1024 ** 3)):.2f} GB', file_handle)
-    print_output(f'Free: {(free / (1024 ** 3)):.2f} GB', file_handle)
+    if drives is None:
+        if current_os == 'Windows':
+            drives = []
+            for letter in string.ascii_uppercase:
+                drive = f"{letter}:/"
+                try:
+                    shutil.diskusage(drive)
+                    drives.append(drive)
+                except OSError:
+                    continue
+        else:
+            drives = ["/"]
+    if not drives:
+        print_output("No drives found...", file_handle)
+        return
+    
+    for drivepath in drives:
+        try:
+            total, used, free = shutil.disk_usage(drivepath)
+            
+            total_gb = total / (1024 ** 3)
+            free_gb = free / (1024 ** 3)
+            used_gb = used / (1024 ** 3)
+            
+            print_output(f"Drive: {drivepath}", file_handle)
+            print_output(f"  Total: {total_gb:.2f} GB", file_handle)
+            print_output(f"  Free:  {free_gb:.2f} GB", file_handle)
+        except OSError as e:
+            print_output(f"Error accessing {drivepath}: {e}", file_handle)
+        except Exception as e:
+            print_output(f"{drivepath} - Unexpected error: {e}", file_handle)
 
 #getting IPv4 address
 def IPinfo(file_handle=None):
