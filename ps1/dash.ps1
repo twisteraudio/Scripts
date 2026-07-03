@@ -110,6 +110,14 @@ function get-dashboard {
             write-warning "Error at -p switch...Something went wrong"
         }
     }
+
+    clear-host
+    get-start
+    get-thetime
+    write-host "System booted since: $uptime"
+    get-IPinfo
+    get-driveinfo
+
 }
 
 if ($l) {
