@@ -79,8 +79,7 @@ Function get-comparison {
         $file   = $item.File
         $hash   = $item.Hash
         $status = $item.SideIndicator
-
-        # Simpler output method
+        
         Write-Host ("{0,-50} {1,-60} {2}" -f $file, $hash, $status) -ForegroundColor $color
     }
 
