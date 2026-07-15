@@ -30,7 +30,7 @@ if (-not (Test-Path $t -PathType Container)) {
     Write-Error "Target directory does not exist: $t" -ErrorAction Stop
 }
 
-Function get-dirhash {
+Function Get-Dirhash {
     Get-ChildItem -Path $t -File -Recurse:$r | 
             Get-FileHash -Algorithm SHA256 | 
             Select-Object @{
@@ -45,30 +45,30 @@ Function get-dirhash {
             }
 }
 
-Function get-hashfile {
-    $dirhash = get-dirhash
+Function Get-Hashfile {
+    $Dirhash = get-dirhash
 
     if (-not (test-path $h)) {
-        write-host "Hash file does now exist, creating new file..." -ForegroundColor Cyan
-        $dirhash | Export-csv $h -NoTypeInformation
-        write-host "Hash snapshot created" -ForegroundColor Green
+        Write-Host "Hash file does now exist, creating new file..." -ForegroundColor Cyan
+        $Dirhash | Export-csv $h -NoTypeInformation
+        Write-Host "Hash snapshot created" -ForegroundColor Green
         return
     }
 }
 
-Function get-comparison {
-    $Current_Hash = get-dirhash
+Function Get-Comparison {
+    $Current_Hash = Get-Dirhash
 
-    $Hash_CSV = import-csv -path $h
+    $Hash_CSV = Import-CSV -path $h
 
-    $compare = Compare-Object -ReferenceObject $Hash_CSV -DifferenceObject $Current_Hash -IncludeEqual -Property File, Hash
+    $Compare = Compare-Object -ReferenceObject $Hash_CSV -DifferenceObject $Current_Hash -IncludeEqual -Property File, Hash
 
-    if (-not $compare) {
-        write-host "No Files selected for comparison" -ForegroundColor Yellow
+    if (-not $Compare) {
+        Write-Host "No Files selected for comparison" -ForegroundColor Yellow
 
     }
 
-    foreach ($item in $compare) {
+    foreach ($item in $Compare) {
         $color = switch ($item.SideIndicator) {
             '==' { 'Green' }
             '=>' { 'Red' }
@@ -85,5 +85,5 @@ Function get-comparison {
 
 }
 
-get-hashfile
-get-comparison
+Get-Hashfile
+Get-Comparison
