@@ -1,3 +1,17 @@
+"""
+D20 death save
+A little quick game involving a D20 die
+Rules: Roll D20 up to 5 times
+Anything below 10 = death +1
+Anthing at or above 10 = life +1
+Nat20 = life +2
+Nat1 = death +1
+
+Usage:
+    python3 d20.py      - That's it
+
+"""
+
 import random,time,os
 
 life = 0

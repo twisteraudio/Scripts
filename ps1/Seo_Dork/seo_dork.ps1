@@ -1,6 +1,27 @@
 #goal: use google dorks to give results of job postings within input parameter
 #must be used as non-sudo
 
+<#
+.SYNOPSIS
+    Search for job posting utilizing Google dorking
+.DESCRIPTION
+    Opens the default web browser and searches for specific job boards.
+    It checks those links with locations
+    Then filters out to only show postings after certain date
+.PARAMETER min
+    Filters posting by selected days (ie. 5 = postings made within the last 5 days)
+.PARAMETER q
+    Conducts a quick search with no location or specific sites
+.PARAMETER basic
+    Conducts search using keywords in basic.txt
+.PARAMETER sec
+    Conducts search using keywords in sec.txt
+.EXAMPLE
+    .\seo_dork.ps1 -min 7
+.EXAMPLE
+    .\seo_dork.ps1 -basic -min 3
+#>
+
 param(
     [parameter(Mandatory=$true)]
     [string]$min,

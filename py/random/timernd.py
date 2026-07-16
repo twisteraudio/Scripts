@@ -1,4 +1,6 @@
-#goal: round timestamp for clock in/out to nearest quarter hour
+"""
+Round timestamp to the nearest 15 minute marker
+"""
 
 import pandas as pd, argparse
 
