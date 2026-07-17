@@ -250,8 +250,7 @@ elseif ($o) {
         Write-Color "Dashboard saved to: $outputPath" -ForegroundColor Green
 
         if ($script:WarningLog.Count -gt 0 -or $script:ErrorLog.Count -gt 0) {
-            Write-Host ""
-            Write-Color "=== Execution Summary ===" -ForegroundColor Yellow
+            Write-Color ("-"*8 + " SUMMARY " + "-"*8) -ForegroundColor Yellow
             Write-Host "Warnings: $($script:WarningLog.Count)"
             Write-Host "Errors: $($script:ErrorLog.Count)"
         }
