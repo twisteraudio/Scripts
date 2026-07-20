@@ -8,10 +8,19 @@ Please only run these scripts on systems where you have explicit authorization. 
 # Contents
 
 PowerShell Scripts (.ps1)
-A collection of PowerShell scripts.  Personal favorite: weather.ps1 – A lightweight weather application that uses Microsoft Text-to-Speech (TTS).
+A collection of PowerShell scripts.  
+
+Personal favorite: weather.ps1    A lightweight weather application that uses Microsoft Text-to-Speech (TTS).
 
 Python Scripts (.py)
-A collection of Python scripts.  Personal favorite: pacs.py – A simple packet sniffer.
+A collection of Python scripts.  
+
+Personal favorite: pacs.py    A simple packet sniffer.
+
+Bash Scripts (.sh)
+A collection of Bash scripts.
+
+Personal favorite: da.sh    A system dashboard with cheeky filename
 
 Additional scripts will be added over time as new tools are developed.
 
