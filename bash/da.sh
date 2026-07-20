@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#make dashboard same as in powershell and python
-
 RED='\e[31m'
 GREEN='\e[32m'
 YELLOW='\e[33m'
