@@ -74,8 +74,6 @@ PingBurnie() {
     fi
 }
 
-#wifi strength
-
 main() {
     printf '%8s NETWORK DASHBOARD %8s\n' | tr ' ' '-'
     echo
