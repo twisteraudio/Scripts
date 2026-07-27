@@ -27,7 +27,7 @@ GetMac() {
     echo -e "MAC: ${GREEN}${GetMacAddy}${RESET}"
 }
 
-#ping local gateway, 8.8.8.8, burnie.com
+NetUp=0
 
 PingGate() {
     local GetGate=$(ip route show default | awk '/default/ {print $3}')
@@ -38,6 +38,7 @@ PingGate() {
 
     if ping -c 1 -W2 "$GetGate" &> /dev/null; then
         echo -e "Gateway: ${GREEN}${GetGate}${RESET} is reachable"
+        ((NetUp ++))
         return 0
     else 
         echo -e "Gateway: ${RED}${GetGate}${RESET} is not reachable"
@@ -53,6 +54,7 @@ PingGoogle() {
 
     if ping -c 1 -W2 "$GetGoogle" &> /dev/null; then
         echo -e "Google: ${GREEN}${GetGoogle}${RESET} is reachable"
+        ((NetUp ++))
         return 0
     else 
         echo -e "Google: ${RED}${GetGoogle}${RESET} is not reachable"
@@ -68,10 +70,26 @@ PingBurnie() {
 
     if ping -c 1 -W2 "$GetBurnie" &> /dev/null; then
         echo -e "Burnie: ${GREEN}${GetBurnie}${RESET} is reachable"
+        ((NetUp ++))
         return 0
     else 
         echo -e "Burnie: ${RED}${GetBurnie}${RESET} is not reachable"
     fi
+}
+
+GetNet() {
+
+    if [ $NetUp != 3 ]; then
+        echo -e "${RED}An error occurred when testing connection${RESET}"
+    else
+        echo -e "${GREEN}Connetion confirmed${RESET}"
+    fi
+}
+
+GetWiFi() {
+    local GetStrength=$(iwconfig wlo1 | grep -i signal | grep -oE '\-?[0-9]+ dBm')
+
+    echo -e "Wifi Strength: ${YELLOW}${GetStrength}${RESET}"
 }
 
 main() {
@@ -80,10 +98,13 @@ main() {
     GetNetInt
     GetMac
     echo
+    GetWiFi
     GetIP
     PingGate
     PingGoogle
     PingBurnie
+    echo
+    GetNet
 }
 
 main
