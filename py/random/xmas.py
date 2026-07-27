@@ -1,3 +1,7 @@
+"""
+Is it Xmas yet?
+"""
+
 import time
 import datetime
 

@@ -1,4 +1,14 @@
-import socket, os, sys, datetime,argparse
+"""
+Port scanner in python
+Scan the first 1000 ports of an IP address
+DISCLAIMER - Please use caution and only ping IP addresses that you have permission to test
+
+Usage:
+
+    python3 ports.py -i             - Input IP address to scan
+"""
+
+import socket, os, sys, datetime, argparse
 
 def main():
     parser = argparse.ArgumentParser(description = "Python IP Port scan")

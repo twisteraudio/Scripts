@@ -1,3 +1,13 @@
+"""
+Python network packet sniffer
+A network sniffer tool using scapy, filter by connection type or interface type
+
+Usage:
+    python3 pacs.py -f              - filter by connection type
+    python3 pacs.py -i              - filter by interface type
+    python3 pacs.py -c              - number of packets to capture
+"""
+
 import argparse,time,subprocess
 from scapy.all import sniff, IP
 

@@ -1,4 +1,14 @@
-#get user input and put it into the url for wttr.in
+<#
+.SYNOPSIS
+    PowerShell weather utilizing wttr.in
+.DESCRIPTION
+    Check weather in ceratin location utilizing wttr.in 
+.PARAMETER loc
+    Location/City you would like to check
+.EXAMPLE
+    .\weather.ps1 -loc Austin
+    .\weather.ps1 -loc 'San Francisco'
+#>
 
 param(
     [parameter(Mandatory=$true)]

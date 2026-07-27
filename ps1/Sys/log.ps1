@@ -1,6 +1,15 @@
-#simple log file parser
-#ty = type of pattern you would like to look for
-#ie: error, security, auth, login, skiddiestuff
+<#
+.SYNOPSIS
+    PowerShell log parser
+.DESCRIPTION
+    Parses through system logs to quickly determine certain events
+.PARAMETER ty
+    Enter pattern type you would like to search for
+    ie: Errors, Security, Auth, Login
+.EXAMPLE
+    .\log.ps1 -ty failed
+    .\log.ps1 -ty 3301
+#>
 
 param(
     [parameter(Mandatory=$true)]
@@ -8,7 +17,7 @@ param(
 )
 
 if ($IsLinux) {
-    $logpath = '/var/log/syslog'
+    $logpath = '/var/log/auth.log'
 }
 elseif ($IsMac) {
     $logpath = '/var/log/system.log'

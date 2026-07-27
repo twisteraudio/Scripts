@@ -1,5 +1,8 @@
 """
 Round timestamp to the nearest 15 minute marker
+
+Usage:
+    python3 timernd.py -t "7/20/2026 7:18:11"
 """
 
 import pandas as pd, argparse

@@ -1,4 +1,6 @@
-#goal: create a randomized twister spin
+"""
+Quick Twister spinner
+"""
 
 from random import choice as rc
 import array

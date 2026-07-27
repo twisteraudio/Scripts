@@ -1,5 +1,13 @@
-#do you hate Windows Photos too?
-#use this script and let Powershell load it's own image viewer
+<#
+.SYNOPSIS
+	Image viewer using PowerShell
+.DESCRIPTION
+	[WINDOWS ONLY] Opens a PowerShell image viewer
+.PARAMETER IP
+	Image Path
+.EXAMPLE
+	.\vwr.ps1 -IP $home\Pictures\Wallpapers
+#>
 
 param(
 	[Parameter(Mandatory=$true)]

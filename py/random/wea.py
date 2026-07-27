@@ -1,5 +1,11 @@
-#weather app for python
-#using wttr.in
+"""
+Weather checker
+Check the weather in a location using wttr.in
+
+Usage:
+    python3 wea.py -loc Austin
+    Python3 wea.py -loc 'San Francisco'
+"""
 
 import argparse, os
 
