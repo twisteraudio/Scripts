@@ -4,9 +4,9 @@ A quick cross-platform system information dashboard.
 
 Usage:
     python3 dash.py
-    python3 dash.py -l                  # Loop every 5 seconds
-    python3 dash.py -o output.log       # Write to file
-    python3 dash.py -l -o output.log    # Loop + write to file
+    python3 dash.py -l                  - Loop every 5 seconds
+    python3 dash.py -o output.log       - Write to file (txt, csv, log)
+    python3 dash.py -l -o output.log    - Loop + write to file
 
 """
 
@@ -22,14 +22,26 @@ import time
 from typing import List, Optional
 from datetime import datetime, timezone, timedelta
 
-#color text
-CRED = '\033[91m'
-CGREEN = '\033[92m'
-CYELLOW = '\033[93m'
-CBLUE = '\033[94m'
-CEND = '\033[0m'
-
-output_file = None
+class Color:
+    RED = '\033[91m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    BLUE = '\033[94m'
+    MAGENTA = '\033[35m'
+    CYAN = '\033[36m'
+    LIGHTGRAY = '\033[37m'
+    GRAY = '\033[90m'
+    LIGHTRED = '\033[91m'
+    LIGHTGREEN = '\033[92m'
+    LIGHTYELLOW = '\033[93'
+    LIGHTBLUE = '\033[94m'
+    LIGHTMAGENTA = '\033[95m'
+    LIGHTCYAN = '\033[96m'
+    WHITE = '\033[97m'
+    BOLD = '\033e[1m'
+    ITALIC = '\033[3m'
+    UNDERLINE = '\033[4m'
+    END = '\033[0m'
 
 #reverse ansi color text for file output
 def anti_ansi(text):
@@ -50,13 +62,13 @@ def clear_scn():
 #getting local and UTC time
 def thetime(file_handle=None):
 
-    print_output(CBLUE + "Local time: " + str(datetime.now()) + CEND, file_handle)
-    print_output(CBLUE + "UTC time: " + str(datetime.now(timezone.utc)) + CEND, file_handle)
-
     #system uptime
     uptime_seconds = time.monotonic()
     uptime_str = str(timedelta(seconds=uptime_seconds))
-    print_output(f"System uptime: {uptime_str}", file_handle)
+    print_output(f"{Color.LIGHTCYAN}System uptime: {uptime_str}{Color.END}", file_handle)
+
+    print_output(f"{Color.BLUE}Local time: {Color.END}" + str(datetime.now()), file_handle)
+    print_output(f"{Color.BLUE}UTC time: {Color.END}" + str(datetime.now(timezone.utc)), file_handle)
 
 #getting drive space info
 def drivespace(file_handle=None,drives: Optional[List[str]] = None):
@@ -75,6 +87,7 @@ def drivespace(file_handle=None,drives: Optional[List[str]] = None):
                     continue
         else:
             drives = ["/"]
+            
     if not drives:
         print_output("No drives found...", file_handle)
         return
@@ -88,8 +101,8 @@ def drivespace(file_handle=None,drives: Optional[List[str]] = None):
             used_gb = used / (1024 ** 3)
             
             print_output(f"Drive: {drivepath}", file_handle)
-            print_output(f"  Total: {total_gb:.2f} GB", file_handle)
-            print_output(f"  Free:  {free_gb:.2f} GB", file_handle)
+            print_output(f"{Color.LIGHTGREEN}Total: {total_gb:.2f} GB{Color.END}", file_handle)
+            print_output(f"{Color.LIGHTGREEN}Free:  {free_gb:.2f} GB{Color.END}", file_handle)
         except OSError as e:
             print_output(f"Error accessing {drivepath}: {e}", file_handle)
         except Exception as e:
@@ -115,21 +128,21 @@ def IPinfo(file_handle=None):
     try:
         response = subprocess.run(command, capture_output=True, timeout=2)
         if response.returncode == 0:
-            print_output(CGREEN + f"{IP} is Online" + CEND, file_handle)
+            print_output(f"{Color.GREEN}{IP} is Online{Color.END}", file_handle)
         else:
-            print_output(CRED + "Offline..." + CEND, file_handle)
+            print_output(f"{Color.RED}Offline...{Color.END}", file_handle)
     except subprocess.TimeoutExpired:
-        print_output("Timeout Error...", file_handle)
+        print_output(f"Timeout Error...", file_handle)
     except Exception as e:
         print_output(f"Error when pinging {IP}", file_handle)
 
 def sysInfo(file_handle=None):
 
-    print_output('-' *8 + ' DASHBOARD ' + '-' *8, file_handle)
+    print_output('-' *8 + ' SYSTEM DASHBOARD ' + '-' *8, file_handle)
     thetime(file_handle)
-    drivespace(file_handle)
     IPinfo(file_handle)
-    print_output("")
+    drivespace(file_handle)
+    print_output('-' * 34, file_handle)
 
 def run_loop(file_handle=None):
     while True:
@@ -138,8 +151,6 @@ def run_loop(file_handle=None):
         time.sleep(5)
 
 def main():
-
-    global output_file
 
     parser = argparse.ArgumentParser(description = "Python System Dashboard")
     parser.add_argument("-l", "--loop", action="store_true", help="Loop dashboard")
@@ -159,11 +170,12 @@ def main():
             sysInfo(file_handle)
 
     except KeyboardInterrupt:
-        print_output("\nYou pressed Ctrl+C, exiting...", file_handle)
+        print_output(f"{Color.YELLOW}\nYou pressed Ctrl+C, exiting...{Color.END}", file_handle)
+        
     finally:
         if file_handle:
             file_handle.close()
-            print(f"File {args.outfile} written successfully")
+            print(f"{Color.GREEN}File {args.outfile} written successfully{Color.END}")
 
 if __name__ == "__main__":
     main()
