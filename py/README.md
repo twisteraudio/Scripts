@@ -8,6 +8,10 @@ Network - Various network monitors and scanners
 
 Random - Games and quick programs
 
+Repy - Record collection query and randomizer
+
+Dork - Job search program
+
 dash.py - system dashboard
 
 # [Disclaimer]
